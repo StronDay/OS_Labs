@@ -86,8 +86,6 @@ int main(int argc, char **argv)
 {
     int retGetopt;
 
-    //fork();
-
     while((retGetopt = getopt(argc, argv, "ensb")) != -1)
     {
         switch(retGetopt)
