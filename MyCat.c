@@ -11,7 +11,6 @@ int bflag = 0;
 
 void fileOutput(const char *fileName)
 {
-    int ch;
     FILE *file;
     if ((file = fopen(fileName, "r")) == NULL)
     {
@@ -21,7 +20,6 @@ void fileOutput(const char *fileName)
 
     unsigned int size = 1024;
     unsigned int num = 0;
-    unsigned int counter = 0;
 
     char buffer[size];
     char symb;
