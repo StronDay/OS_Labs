@@ -2,10 +2,7 @@
 
 int main()
 {
-    int pidID = getpid();
-    printf("Pid write: %d\n", pidID);
-
-    int* sharedMemory = connectSharedMemory("./src/memory.c", sizeof(int) * 2);
+    int* sharedMemory = connectSharedMemory("./src/memory.c", 100, true);
     if (sharedMemory == NULL)
     {
         printf("ERROR: couldn't get shared memory!\n");
@@ -14,9 +11,7 @@ int main()
 
     int output[2];
     output[0] = time(NULL);
-    output[1] = pidID;
-
-    if (getpid())
+    output[1] = getpid();
 
     while(1)
     {

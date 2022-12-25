@@ -2,7 +2,7 @@
 
 int main()
 {
-    int *sharedMemory = connectSharedMemory("./src/memory.c", sizeof(int) * 2);
+    int *sharedMemory = connectSharedMemory("./src/memory.c", 100, false);
     if (sharedMemory == NULL)
     {
         printf("ERROR: couldn't get shared memory!\n");
