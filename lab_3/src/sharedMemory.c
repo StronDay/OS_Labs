@@ -1,12 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <sys/types.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
-
-#include <stdbool.h>
 #include "sharedMemory.h"
 
 #define ERR (-1)
@@ -14,6 +5,8 @@
 int getSharedMemory(char* fileName, unsigned int size)
 {
     key_t key = ftok(fileName, 0);
+    printf("key: %d\n", key);
+
     if (key == -1)
     {
         printf("The key was not initialized!\n");
@@ -49,6 +42,9 @@ bool deleteSharedMemory(char* fileName)
 {
     int sharedMemoryID = getSharedMemory(fileName, 0);
     if (sharedMemoryID == -1) return NULL;
+
+    //SHM_LOCK
+    //SHM_UNLOCK
 
     return (shmctl(sharedMemoryID, IPC_RMID, NULL) != -1);
 }

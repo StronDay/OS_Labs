@@ -1,19 +1,20 @@
-CC = clang
+TARGET = read.exe write.exe destroy.exe
+CC = gcc
 CFLAGS = -g -Wall
-OBJS = sharedMemory.o
-EXE = writeF.elf readF.elf delete.elf
+OBJS = ./src/sharedMemory.o
 
-all: $(EXE)
+PREF_SRC = ./src/
 
-%.elf: %.o $(OBJS)
-	$(CC) $(CFLAGS) $< $(OBJS) -o $@
+all: $(TARGET)
 
-%.o: %.c %.h
-	$(CC) $(CFLAGS) -c $< -o $@ 
+%.exe : $(PREF_SRC)%.o $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $@
 
-	
-%.o: %.c
+%.o: $(PREF_SRC)%.c $(PREF_SRC)%.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+%.o: $(PREF_SRC)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf *.dSYM *.o $(EXE)
+	rm $(TARGET)
