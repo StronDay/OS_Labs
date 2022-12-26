@@ -1,20 +1,18 @@
-TARGET = read.exe write.exe destroy.exe
+TARGET = read write destroy
 CC = gcc
 CFLAGS = -g -Wall
-OBJS = ./src/sharedMemory.o
-
 PREF_SRC = ./src/
 
 all: $(TARGET)
 
-%.exe : $(PREF_SRC)%.o $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+read: $(PREF_SRC)read.c $(PREF_SRC)sharedMemory.c
+	$(CC) $(CFLAGS) $(PREF_SRC)read.c $(PREF_SRC)sharedMemory.c -o read
 
-%.o: $(PREF_SRC)%.c $(PREF_SRC)%.h
-	$(CC) $(CFLAGS) -c $< -o $@
+write: $(PREF_SRC)write.c $(PREF_SRC)sharedMemory.c
+	$(CC) $(CFLAGS) $(PREF_SRC)write.c $(PREF_SRC)sharedMemory.c -o write
 
-%.o: $(PREF_SRC)%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+destroy: $(PREF_SRC)destroy.c $(PREF_SRC)sharedMemory.c
+	$(CC) $(CFLAGS) $(PREF_SRC)destroy.c $(PREF_SRC)sharedMemory.c -o destroy
 
 clean:
 	rm $(TARGET)
